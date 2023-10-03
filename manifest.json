@@ -1,0 +1,42 @@
+{
+    "manifest_version": 3,
+    "name": "ChatGPT Extension",
+    "version": "0.0.1",
+    "description": "Improve your ChatGPT experience with this extension! Bulk exports, bulk deletes, save prompts and more!",
+    "permissions": [
+        "activeTab",
+        "cookies",
+        "declarativeContent",
+        "scripting",
+        "storage",
+        "tabs",
+        "webRequest"
+    ],
+    "host_permissions": [
+        "https://*/*",
+        "https://*/*"
+    ],
+    "action": {
+        "default_popup": "index.html"
+    },
+    "background": {
+        "service_worker": "src/background/background.ts",
+        "type": "module",
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*/*",
+                "http://*/*"
+            ],
+            "js": [
+                "src/contentScript/main.tsx"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "icons": {
+        "48": "icon48.png"
+    }
+}
